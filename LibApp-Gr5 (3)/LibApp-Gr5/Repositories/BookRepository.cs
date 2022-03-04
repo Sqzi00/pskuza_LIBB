@@ -4,6 +4,8 @@ using LibApp.Interfaces;
 using LibApp.Data;
 using System.Collections.Generic;
 using LibApp.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace LibApp.Repositories
 {
     public class BookRepository : IBookRepository
@@ -16,9 +18,9 @@ namespace LibApp.Repositories
             _context = context;
 
         }
-        public IEnumerable<BookRepository> GetBooks()
+        public IEnumerable<Book> GetBooks()
         {
-            return _context.Books;
+            return _context.Books.Include(b => b.Genre);
 
         }
 
@@ -34,6 +36,34 @@ namespace LibApp.Repositories
 
         void Save() => _context.SaveChanges();
 
+        IEnumerable<Book> IBookRepository.GetBooks()
+        {
+            throw new System.NotImplementedException();
+        }
 
+        Book IBookRepository.GetBookById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IBookRepository.AddBook(Book book)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IBookRepository.UpdateBook(Book book)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IBookRepository.DeleteBook(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IBookRepository.Save()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
